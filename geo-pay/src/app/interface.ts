@@ -9,7 +9,7 @@ export interface AdvanceRequest {
     id: string
     applicant: Applicant
     description: string
-    status: string
+    status?: 'approved' | 'cancelled' | 'pending';
     date: string
   }
   
