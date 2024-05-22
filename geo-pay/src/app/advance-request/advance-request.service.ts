@@ -1,6 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { Observable, of } from 'rxjs';
+import { AdvanceRequest } from '../interface';
+
 
 @Injectable({
   providedIn: 'root'
@@ -8,12 +10,49 @@ import { Observable, of } from 'rxjs';
 export class AdvanceRequestService {
   // readonly #http = inject(HttpClient)
   // private baseUrl = `/request`
-  private employees: string[] = ['Employee 1', 'Employee 2', 'Employee 3'];
+  private requests: AdvanceRequest = 
+  
+{
+  "count": 1,
+  "next": null,
+  "previous": null,
+  "details": [
+      {
+          "id": "1234567890",
+          "applicant": {
+              "name":"Mark Yeuns",
+              "photo": "https://uns"
+          },
+          "description": "Advance Request",
+          "status": "Pending",
+          "date": "23/5/2024"
+      },
+      {
+        "id": "1234567891",
+        "applicant": {
+            "name":"Jane Doe",
+            "photo": "https://uns"
+        },
+        "description": "Advance Request",
+        "status": "Pending",
+        "date": "23/5/2024"
+    }, {
+      "id": "1234567892",
+      "applicant": {
+          "name":"John Yeuns",
+          "photo": "https://uns"
+      },
+      "description": "Advance Request",
+      "status": "Pending",
+      "date": "23/5/2024"
+  }
+  ]
+}
 
   // private baseUrl =`/requests`;
   constructor(private _http: HttpClient) { }
 
   getAllRequests() {
-    return this.employees
+    return this.requests
   }
 }
