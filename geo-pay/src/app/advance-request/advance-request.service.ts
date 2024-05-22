@@ -24,7 +24,7 @@ export class AdvanceRequestService {
               "photo": "https://uns"
           },
           "description": "Advance Request",
-          "status": "Pending",
+          "status": "pending",
           "date": "23/5/2024"
       },
       {
@@ -34,7 +34,7 @@ export class AdvanceRequestService {
             "photo": "https://uns"
         },
         "description": "Advance Request",
-        "status": "Pending",
+        "status": "pending",
         "date": "23/5/2024"
     }, {
       "id": "1234567892",
@@ -43,7 +43,7 @@ export class AdvanceRequestService {
           "photo": "https://uns"
       },
       "description": "Advance Request",
-      "status": "Pending",
+      "status": "pending",
       "date": "23/5/2024"
   }
   ]

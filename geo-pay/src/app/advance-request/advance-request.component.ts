@@ -5,6 +5,9 @@ import { MatCardModule } from '@angular/material/card';
 import { AuthServiceService } from '../auth-service.service';
 import {MatDividerModule} from '@angular/material/divider';
 import { Request } from '../interface';
+import {MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog'
+import { CancelDialogComponent } from '../modals/cancel-dialog/cancel-dialog.component';
+import swal from 'sweetalert';
 @Component({
   selector: 'app-advance-request',
   standalone: true,
@@ -21,13 +24,23 @@ export class AdvanceRequestComponent implements OnInit{
 
   constructor(
     private advanceRequestService: AdvanceRequestService,
+    public dialog: MatDialog
   ) {  }
 
   ngOnInit(): void {
     this.viewAllRequests()
 }
+  // viewAllRequests(): void {
+  //   this.requests = this.advanceRequestService.getAllRequests().details;
+  // }
   viewAllRequests(): void {
     this.requests = this.advanceRequestService.getAllRequests().details;
+    // Initialize request statuses to 'pending'
+    this.requests.forEach(request => {
+      if (!request.status) {
+        request.status = 'pending';
+      }
+    });
   }
 
   // viewAllRequests(): void {
@@ -40,11 +53,40 @@ export class AdvanceRequestComponent implements OnInit{
   //   });
   // }
 
-  approveRequest() {
+  approveRequest(request: Request) {
     console.log('approve');
   }
 
-  cancelRequest() {
-    console.log('cancel');
+  cancelRequest(requests: Request): void {
+//     this.dialog.open(CancelDialogComponent, {
+//       width: '750px',
+//       maxHeight: '650px',
+// });
+// const dialogRef = this.dialog.open(CancelDialogComponent);
+
+// dialogRef.afterClosed().subscribe(result => {
+//   if(result) {
+//     console.log('ifcancelled');
+//   } else {
+//     console.log('notcancelled');
+//   }
+
+// })
+// // console.log('cancel');
+swal({
+  title: "Are you sure?",
+  icon: "warning",
+  dangerMode: true,
+})
+.then((willDelete) => {
+  if (willDelete) {
+    requests.status = 'cancelled';
+    swal("The request has been cancelled!", {
+      icon: "success",
+    });
+  } else {
+    
   }
+});
 }
+};
