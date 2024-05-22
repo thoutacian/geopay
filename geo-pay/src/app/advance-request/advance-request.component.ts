@@ -4,6 +4,7 @@ import { NgFor, NgIf } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
 import { AuthServiceService } from '../auth-service.service';
 import {MatDividerModule} from '@angular/material/divider';
+import { Request } from '../interface';
 @Component({
   selector: 'app-advance-request',
   standalone: true,
@@ -15,7 +16,7 @@ export class AdvanceRequestComponent implements OnInit{
   // requests: Request[] = [];
   authService = inject(AuthServiceService);
 
-  employees: string[] = [];
+  requests!: Request[];
 
 
   constructor(
@@ -23,10 +24,10 @@ export class AdvanceRequestComponent implements OnInit{
   ) {  }
 
   ngOnInit(): void {
-    this.employees = this.advanceRequestService.getAllRequests();
+    this.viewAllRequests()
 }
   viewAllRequests(): void {
-
+    this.requests = this.advanceRequestService.getAllRequests().details;
   }
 
   // viewAllRequests(): void {
@@ -41,5 +42,9 @@ export class AdvanceRequestComponent implements OnInit{
 
   approveRequest() {
     console.log('approve');
+  }
+
+  cancelRequest() {
+    console.log('cancel');
   }
 }
