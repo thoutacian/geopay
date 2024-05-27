@@ -6,12 +6,12 @@ import { AuthServiceService } from '../auth-service.service';
 import {MatDividerModule} from '@angular/material/divider';
 import { Request } from '../interface';
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog'
-import { CancelDialogComponent } from '../modals/cancel-dialog/cancel-dialog.component';
+import { MatPaginatorModule } from '@angular/material/paginator';
 import swal from 'sweetalert';
 @Component({
   selector: 'app-advance-request',
   standalone: true,
-  imports: [NgFor,NgIf, MatCardModule,MatDividerModule],
+  imports: [NgFor,NgIf, MatCardModule,MatDividerModule,MatPaginatorModule],
   templateUrl: './advance-request.component.html',
   styleUrl: './advance-request.component.scss'
 })
@@ -53,29 +53,31 @@ export class AdvanceRequestComponent implements OnInit{
   //   });
   // }
 
-  approveRequest(request: Request) {
-    console.log('approve');
+  approveRequest(requests: Request): void {
+    swal({
+      title: "Are you sure?",
+      icon: "warning",
+      buttons: [true, "Approve"],
+      dangerMode: false,
+    })
+    .then((willApprove) => {
+      if (willApprove) {
+        requests.status = 'approved';
+        swal("The request has been Approved!", {
+          icon: "success",
+        });
+      } else {
+        
+      }
+    });
   }
 
   cancelRequest(requests: Request): void {
-//     this.dialog.open(CancelDialogComponent, {
-//       width: '750px',
-//       maxHeight: '650px',
-// });
-// const dialogRef = this.dialog.open(CancelDialogComponent);
 
-// dialogRef.afterClosed().subscribe(result => {
-//   if(result) {
-//     console.log('ifcancelled');
-//   } else {
-//     console.log('notcancelled');
-//   }
-
-// })
-// // console.log('cancel');
 swal({
   title: "Are you sure?",
   icon: "warning",
+  buttons: [true, "Ok"],
   dangerMode: true,
 })
 .then((willDelete) => {

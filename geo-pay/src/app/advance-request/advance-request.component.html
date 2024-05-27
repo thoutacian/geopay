@@ -4,7 +4,7 @@
       <div class="flex justify-between items-center mb-4">
         <div class="text-lg">All Salary Advance Requests</div>
         <button class="bg-blue-500 text-white px-4 py-2 rounded-md" style="background-color: #27432E;">
-          View All Requests
+          Approve All Requests
         </button>
       </div>
       <div class="grid grid-cols-1 gap-4">
@@ -32,9 +32,16 @@
                 </ng-template>
               </div>
             </div>
+            
           </mat-card>
         </div>
       </div>
+      <mat-paginator [length]="100"
+              [pageSize]="10"
+              [pageSizeOptions]="[5, 10, 25, 100]"
+              aria-label="Select page">
+</mat-paginator>
+
     </div>
   </div>
 </div>
